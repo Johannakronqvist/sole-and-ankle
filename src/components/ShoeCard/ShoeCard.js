@@ -35,7 +35,14 @@ const ShoeCard = ({
     <Link href={`/shoe/${slug}`}>
       <Wrapper>
         <ImageWrapper>
-          <Image alt="" src={imageSrc} />
+          <SalesTag salesTag={variant === 'default' ? '' : variant}>
+            {variant === 'on-sale'
+              ? 'Sale'
+              : variant === 'new-release'
+              ? 'Just Released'
+              : null}
+          </SalesTag>
+          <Image alt='' src={imageSrc} />
         </ImageWrapper>
         <Spacer size={12} />
         <Row>
@@ -50,18 +57,41 @@ const ShoeCard = ({
   );
 };
 
+const SalesTag = styled.span`
+  position: absolute;
+  background-color: ${(props) =>
+    props.salesTag === 'on-sale'
+      ? COLORS.primary
+      : props.salesTag === 'new-release'
+      ? COLORS.secondary
+      : null};
+  color: ${COLORS.white};
+  top: 12px;
+  right: -4px;
+  padding: 8px 10px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+`;
+
 const Link = styled.a`
   text-decoration: none;
   color: inherit;
 `;
 
-const Wrapper = styled.article``;
+const Wrapper = styled.article`
+  display: flex;
+  flex-direction: column;
+  width: 340px;
+`;
 
 const ImageWrapper = styled.div`
   position: relative;
 `;
 
-const Image = styled.img``;
+const Image = styled.img`
+  width: 100%;
+`;
 
 const Row = styled.div`
   font-size: 1rem;
