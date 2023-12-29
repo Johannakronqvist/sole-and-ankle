@@ -47,10 +47,17 @@ const ShoeCard = ({
         <Spacer size={12} />
         <Row>
           <Name>{name}</Name>
-          <Price>{formatPrice(price)}</Price>
+
+          <Price salePrice={salePrice}>{formatPrice(price)}</Price>
         </Row>
         <Row>
           <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
+
+          {salePrice ? (
+            <SalePrice salePrice={salePrice}>
+              {formatPrice(salePrice)}
+            </SalePrice>
+          ) : null}
         </Row>
       </Wrapper>
     </Link>
@@ -95,6 +102,8 @@ const Image = styled.img`
 
 const Row = styled.div`
   font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Name = styled.h3`
@@ -102,7 +111,12 @@ const Name = styled.h3`
   color: ${COLORS.gray[900]};
 `;
 
-const Price = styled.span``;
+const Price = styled.span`
+  text-decoration: ${(props) =>
+    typeof props.salePrice === 'number' ? 'line-through' : null};
+  color: ${(props) =>
+    typeof props.salePrice === 'number' ? COLORS.gray[700] : null};
+`;
 
 const ColorInfo = styled.p`
   color: ${COLORS.gray[700]};
