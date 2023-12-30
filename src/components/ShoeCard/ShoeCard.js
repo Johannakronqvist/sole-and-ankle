@@ -48,7 +48,15 @@ const ShoeCard = ({
         <Row>
           <Name>{name}</Name>
 
-          <Price salePrice={salePrice}>{formatPrice(price)}</Price>
+          <Price
+            style={{
+              '--color': variant === 'on-sale' ? COLORS.gray[700] : null,
+              '--text-decoration':
+                variant === 'on-sale' ? 'line-through' : null,
+            }}
+          >
+            {formatPrice(price)}
+          </Price>
         </Row>
         <Row>
           <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
@@ -75,8 +83,11 @@ const SalesTag = styled.span`
   color: ${COLORS.white};
   top: 12px;
   right: -4px;
-  padding: 8px 10px;
-  border-radius: 4px;
+  line-height: 32px;
+  padding: 0px 10px;
+  border-radius: 2px;
+  font-size: ${14 / 18}rem;
+  font-weight: ${WEIGHTS.bold};
   display: flex;
   align-items: center;
 `;
@@ -111,10 +122,8 @@ const Name = styled.h3`
 `;
 
 const Price = styled.span`
-  text-decoration: ${(props) =>
-    typeof props.salePrice === 'number' ? 'line-through' : null};
-  color: ${(props) =>
-    typeof props.salePrice === 'number' ? COLORS.gray[700] : null};
+  text-decoration: var(--text-decoration);
+  color: var(--color);
 `;
 
 const ColorInfo = styled.p`
