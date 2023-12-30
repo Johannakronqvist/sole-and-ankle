@@ -53,8 +53,6 @@ const LeftColumn = styled.div`
 
 const MainColumn = styled.div`
   flex: 1;
-  // display: flex;
-  // flex-direction: column;
 `;
 
 const Header = styled.header`
