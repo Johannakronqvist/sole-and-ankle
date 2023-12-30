@@ -89,7 +89,6 @@ const Link = styled.a`
 const Wrapper = styled.article`
   display: flex;
   flex-direction: column;
-  width: 340px;
 `;
 
 const ImageWrapper = styled.div`
